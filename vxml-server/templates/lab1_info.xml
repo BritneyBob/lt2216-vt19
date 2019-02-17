@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml"
+      xmlns:voxeo="http://community.voxeo.com/xmlns/vxml">
+
+  <link next="lab1_menu">
+    <grammar mode="voice" version="1.0" root="root">
+      <rule id="root" scope="public">
+        <item>start over</item>
+      </rule>
+    </grammar>
+  </link>
+
+  <form id="infoDelayed">
+    <field name="exit" type="boolean">
+      <prompt bargeintype="speech">
+        All flights are on time. Do you want to exit?
+      </prompt>
+      <filled>
+        <if cond="exit">
+          <prompt bargeintype="speech">
+            Thank you for using the flight booking service! Goodbye.
+          </prompt> 
+        <else/>
+          <goto next="lab1_menu" />
+        </if>   
+      </filled>
+    </field>
+  </form>
+
+</vxml>

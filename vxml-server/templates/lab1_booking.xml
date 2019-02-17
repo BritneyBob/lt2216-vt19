@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml"
+      xmlns:voxeo="http://community.voxeo.com/xmlns/vxml">
+    
+  <link next="lab1_menu">
+    <grammar mode="voice" version="1.0" root="root">
+      <rule id="root" scope="public">
+        <item>start over</item>
+      </rule>
+    </grammar>
+  </link>
+
+  <var name="from" />
+  <var name="to" />
+  <var name="date" />
+  <var name="returndate" />
+
+  <form id="askFrom">
+    <field name="fromField">
+      <prompt timeout="10s" bargeintype="speech">
+        What city are you leaving from?
+      </prompt>
+      <option>london</option>
+      <option>paris</option>
+      <option>new york</option>
+      <nomatch>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't understand. Please say the name of a city. You can say London, Paris or New York.
+        </prompt>
+      <reprompt/>
+      </nomatch>
+      <noinput>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't hear anything. Please say the name of a city. You can say London, Paris or New York.
+        </prompt>
+      <reprompt/>
+      </noinput>
+    </field>
+    <filled>
+      <assign name="from" expr="fromField" />
+      <goto next="#askTo" />
+    </filled>
+  </form>
+
+  <form id="askTo">
+    <field name="toField">
+      <prompt bargein="false">
+        Where are you going?
+      </prompt>
+      <option>london</option>
+      <option>paris</option>
+      <option>new york</option>
+      <nomatch>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't understand. Please say the name of a city. You can say London, Paris or New York.
+        </prompt>
+      <reprompt/>
+      </nomatch>
+      <noinput>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't hear anything. Please say the name of a city. You can say London, Paris or New York.
+        </prompt>
+      <reprompt/>
+      </noinput>
+    </field>
+    <filled>
+      <assign name="to" expr="toField" />
+      <if cond="to == from">
+        <clear namelist="to"/>
+        <prompt bargeintype="speech">
+          The city that you are leaving and the city that you are going to must be different.
+        </prompt>
+        <goto next="#askTo" />
+      </if>
+      <goto next="#askDate" />
+    </filled>
+  </form>
+
+  <form id="askDate">
+    <field name="dateField">
+      <prompt bargeintype="speech">
+        What date do you want to leave?
+      </prompt>
+      <option>monday</option>
+      <option>tuesday</option>
+      <option>wednesday</option>
+      <option>thursday</option>
+      <option>friday</option>
+      <option>saturday</option>
+      <option>sunday</option>
+      <nomatch>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't understand. Please say the name of a weekday.
+        </prompt>
+      <reprompt/>
+      </nomatch>
+      <noinput>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't hear anything. Please say the name of a weekday.
+        </prompt>
+      <reprompt/>
+      </noinput>
+    </field>
+    <filled>
+      <assign name="date" expr="dateField" />
+      <goto next="#askOneway" />
+    </filled>
+  </form>
+
+  <form id="askOneway">
+    <field name="oneway" type="boolean">
+      <prompt bargeintype="speech">
+        Is it a one-way trip?
+      </prompt>
+      <nomatch>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't understand.
+        </prompt>
+      <reprompt/>
+      </nomatch> 
+      <noinput>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't hear anything.
+        </prompt>
+      <reprompt/>
+      </noinput>
+      <filled>
+        <if cond="oneway">
+          <goto next="#confirmOneway" />
+        </if>
+        <goto next="#askReturnDate" /> 
+      </filled>  
+    </field>
+  </form>
+  
+  <form id="askReturnDate">
+    <field name="returndateField">
+      <prompt bargeintype="speech">
+        What date do you want to return?
+      </prompt>
+      <option>monday</option>
+      <option>tuesday</option>
+      <option>wednesday</option>
+      <option>thursday</option>
+      <option>friday</option>
+      <option>saturday</option>
+      <option>sunday</option>
+      <nomatch>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't understand. Please say the name of a weekday.
+        </prompt>
+      <reprompt/>
+      </nomatch> 
+      <noinput>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't hear anything. Please say the name of a weekday.
+        </prompt>
+      <reprompt/>
+      </noinput>
+    </field>
+    <filled>
+      <assign name="returndate" expr="returndateField" />
+      <goto next="#confirmReturn" />
+    </filled>
+  </form>
+
+  <form id="confirmOneway">
+    <field name="confirmOneway" type="boolean">
+      <prompt bargeintype="speech">
+        Do you want to go from <value expr="from"/> to <value expr="to"/> on <value expr="date"/>?
+      </prompt>
+      <nomatch>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't understand.
+        </prompt>
+      <reprompt/>
+      </nomatch> 
+      <noinput>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't hear anything.
+        </prompt>
+      <reprompt/>
+      </noinput>
+      <filled>
+        <if cond="confirmOneway">
+          <goto next="#booked" />
+        </if>
+        <clear namelist="from"/>
+        <clear namelist="to"/>
+        <clear namelist="date"/>
+        <prompt bargein="false">
+          Okay, let's start over.
+        </prompt>
+        <goto next="#askFrom" />
+      </filled>
+    </field>
+  </form>
+
+  <form id="confirmReturn">
+    <field name="confirmReturn" type="boolean">
+      <prompt>
+        Do you want to go from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on 
+        <value expr="returndate"/>?
+      </prompt>
+      <nomatch>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't understand.
+        </prompt>
+      <reprompt/>
+      </nomatch> 
+      <noinput>
+        <prompt bargeintype="speech">
+          I'm sorry, I didn't hear anything.
+        </prompt>
+      <reprompt/>
+      </noinput>
+      <filled>
+        <if cond="confirmReturn">
+          <goto next="#booked" />
+        </if> 
+        <clear namelist="from"/>
+        <clear namelist="to"/>
+        <clear namelist="date"/>
+        <clear namelist="returndate"/>
+        <prompt bargein="false">
+          Okay, let's start over.
+        </prompt>
+        <goto next="#askFrom" />
+      </filled>
+    </field>
+  </form>
+
+  <form id="booked">
+    <block>
+      <prompt bargeintype="speech">
+        Your flight has been booked! Thank you for using the flight booking service.
+      </prompt>
+    </block>
+  </form>
+
+</vxml>

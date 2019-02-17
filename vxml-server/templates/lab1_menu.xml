@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml"
+      xmlns:voxeo="http://community.voxeo.com/xmlns/vxml">
+    
+  <link next="lab1_menu">
+    <grammar mode="voice" version="1.0" root="root">
+      <rule id="root" scope="public">
+        <item>start over</item>
+      </rule>
+    </grammar>
+  </link>
+
+  <menu>
+    <prompt bargeintype="speech">
+      Welcome to the flight booking service. What do you want to do?
+      <enumerate/>
+    </prompt>
+    <choice next="lab1_booking">book a flight</choice>  
+    <choice next="lab1_info">get information about delayed flights</choice>
+    <nomatch>
+      <prompt bargeintype="speech">
+        I'm sorry, I didn't understand. Please choose one of the two given options.
+      </prompt>
+    <reprompt/>
+    </nomatch>
+    <noinput>
+      <prompt bargeintype="speech">
+        I'm sorry, I didn't hear anything. Please say one of the two given options.
+      </prompt>
+    <reprompt/>
+    </noinput>
+  </menu>
+
+</vxml>
