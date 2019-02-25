@@ -2,11 +2,36 @@
 <vxml version="2.0">
   <form id="test">
     <block name="foo">
-      <prompt>
-        The biggest loser among the top 10 cryptocurrencies is bitcoin cash (BCH), down 10.58 percent in the last 24 hours. It's also down 24.11 percent from the recent high of $1,641.40. 
-        <break time="2s"/>
-         The biggest loser among the top 10 cryptocurrencies is bitcoin cash (BCH), down 10.58 percent in the last 24 hours. It's also down 24.11 percent from the recent high of $1,641.40. 
+      <prompt xml:lang="en-us">
+        The <prosody rate="slow">biggest </prosody> <emphasis> loser </emphasis> among the
+        <prosody rate="slow"> top 10 </prosody> cryptocurrencies <prosody rate="slow"> is
+        </prosody> bitcoin cash (BCH), down 10.58 percent in the last 24 hours. It's also
+        down 24.11 percent from the recent high of
+        $1,641.40. 
+        <break time="2s"/> 
+        I have your calendar open. 
+        <break strength="medium"/> 
+        For what date? 
+        <break strength="medium"/> 
+        What time would you like to start? 
+        <break strength="medium"/> 
+        How much time do you want to block out? 
+        <break strength="medium"/> 
+        What shall we call this? 
+        <break strength="medium"/> 
+        Ok. I have booked the appointment for you!
+        <break time="2s"/> 
+        I purchased my love for money,
+        there was nothing else I could get,
+        sing angelic, you rasping strings,
+        sing angelic of lovers yet.
+        <break time="0.5s"/> 
+        That dream, that never came true,
+        that dream was angelic to get,
+        for him, who is banished from Eden,
+        is Eden an Eden yet.
       </prompt> 
     </block>
   </form>
 </vxml>
+<!--https://www.youtube.com/watch?v=EgbqDJfF7FM-->
