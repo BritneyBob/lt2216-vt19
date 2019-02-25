@@ -1,26 +1,79 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <vxml version="2.0">
+    
   <nomatch>
-    I didn't understand.
+    Sorry, I didn't understand.
+    <reprompt/>
   </nomatch>
   
   <noinput>
-    You didn't say anything.
+    Sorry, I didn't hear anything.
   </noinput>
 
+  <var name="command"/>
+    
   <form id="test">
     <field name="foo">
-      <prompt>Say something!</prompt>
+      <prompt bargein="false">Say something!</prompt>
       <grammar src="grammars/lab2.xml"/>
     </field>
     <filled>
-	<prompt>
-	  You said: <value expr="foo$.utterance"/>,
-	  with the interpretation <value expr="foo$.interpretation"/>
-	  and with a confidence of <value expr="foo$.confidence"/>
-	  <break time="2s"/>
-	</prompt>
-	<goto next="#test"/>
+    <prompt bargein="false">     
+      You said: <value expr="foo$.utterance"/>,
+      with the interpretation <value expr="foo$.interpretation"/>
+      and with a confidence of <value expr="foo$.confidence"/>
+      <break time="2s"/>
+    </prompt>
+    <goto next="#intelligent"/>
     </filled>
+  </form>
+    
+  <form id="intelligent">
+    <field name="commandField">
+      <prompt bargein="false"> What do you want to do? </prompt>
+      <grammar src="grammars/intelligent.xml"/>
+    </field>
+    <filled>
+      <if cond="commandField$.confidence &gt; 0.5">
+        <prompt bargein="false">
+          <value expr="commandField$.interpretation.action"/> ing the 
+          <value expr="commandField$.interpretation.object"/>
+        </prompt>
+      <elseif cond="commandField$.confidence &gt; 0.3"/>
+        <assign name="command" expr="commandField" />
+        <prompt bargein="false">
+          You asked to <value expr="commandField$.interpretation.action"/> the 
+          <value expr="commandField$.interpretation.object"/>.
+        </prompt>
+        <goto next="#confirmation"/>
+      <else/>
+        <prompt bargein="false">
+          Sorry, I didn't understand.
+        </prompt>
+        <reprompt/>
+      </if> 
+      <goto next="#intelligent"/>
+    </filled>
+  </form>
+         
+  <form id="confirmation">
+    <field name="confirm" type="boolean">
+      <grammar src="grammars/intelligent.xml"/>
+      <prompt bargein="false">
+        Correct?
+      </prompt>
+      <filled>
+        <if cond="confirm">
+          <prompt bargein="false">
+            Okay, your intelligent home will <value expr="command"/>!
+          </prompt>
+        <else/> 
+          <prompt bargein="false">
+            Okay, let's start over.
+          </prompt>
+         </if>
+        <goto next="#intelligent" /> 
+      </filled>  
+    </field>
   </form>
 </vxml>

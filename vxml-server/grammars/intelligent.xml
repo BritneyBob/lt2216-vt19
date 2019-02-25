@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<grammar version="1.0" tag-format="semantics/1.0" root="command">
+  
+  <rule id="command" scope="public">
+    <item repeat="0-2"> <ruleref uri="#polite" /> </item> 
+    <one-of>
+      <item> <ruleref uri="#action1" /> the <ruleref uri="#object1" /> <tag>
+      out.action=rules.action1; out.object=rules.object1; </tag> </item> 
+      <item> <ruleref uri="#action2" /> the <ruleref uri="#object2" /> <tag>
+      out.action=rules.action2; out.object=rules.object2; </tag> </item> 
+    </one-of>
+    <item repeat="0-1"> <ruleref uri="#polite" /> </item>
+  </rule>
+
+  <rule id="action1">
+    <one-of>
+     <item> turn on </item>
+     <item> turn off </item>
+    </one-of>
+  </rule>
+
+    <rule id="action2">
+    <one-of>
+     <item> open </item>
+     <item> close </item>
+    </one-of>
+  </rule>
+    
+  <rule id="object1">
+    <one-of>
+     <item> light </item>
+     <item> heat </item>
+     <item> A C <tag> out = 'air conditioning'; </tag></item>
+     <item> air conditioning </item>
+    </one-of>
+  </rule>  
+    
+  <rule id="object2">
+    <one-of>
+     <item> window </item>
+     <item> door </item>
+    </one-of>
+  </rule> 
+    
+  <rule id="polite">
+    <one-of>
+     <item> please </item>
+     <item> would you </item>
+     <item> could you </item>
+    </one-of>
+  </rule>
+    
+</grammar>
