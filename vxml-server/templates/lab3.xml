@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <vxml version="2.0">
+    
+  <var name="number1" expr="10.58" />
+  <var name="number2" expr="24.11" />
+    
   <form id="test">
     <block name="foo">
       <prompt xml:lang="en-us">
-        The <prosody rate="slow">biggest </prosody> <emphasis> loser </emphasis> among the
+        The <prosody rate="slow"> biggest </prosody> <emphasis> loser </emphasis> among the
         <prosody rate="slow"> top 10 </prosody> cryptocurrencies <prosody rate="slow"> is
-        bitcoin </prosody> <emphasis> cash </emphasis> (BCH), down 10 point fifty eight percent in the last 24 hours. It's 
-        also down 24 point eleven percent from the recent high of $1,641.40.
+        bitcoin </prosody> <emphasis> cash </emphasis> (BCH), down <say-as 
+        interpret-as="vxml:number"><value expr="number1" /></say-as><break/>
+        percent in the last 24 hours. It's also down <say-as interpret-as="vxml:number">
+        <value expr="number2" /></say-as><break/> percent from the recent high of
+        $1,641.40.
           
         <break time="2s"/> 
 
@@ -16,31 +23,37 @@
         <break strength="medium"/> 
         What <prosody rate="slow"> time </prosody> would you like to start? 
         <break strength="medium"/> 
-        How much time do you want to block <prosody rate="slow"><emphasis level="strong"> out </emphasis></prosody>? 
+        How much time do you want to block <prosody rate="slow"><emphasis level="strong">
+        out </emphasis></prosody>? 
         <break strength="medium"/> 
-        What shall we <prosody rate="slow"> call </prosody> <prosody pitch="low"> this? </prosody> 
+        What shall we <prosody rate="slow"> call </prosody> <prosody pitch="low"> this? 
+        </prosody> 
         <break strength="medium"/> 
-        Ok. I have <prosody rate="slow"> booked </prosody> the <prosody rate="slow"> appointment </prosody> for you!
+        Ok. I have <prosody rate="slow"> booked </prosody> the <prosody rate="slow"> 
+        appointment </prosody> for you!
           
         <break time="2s"/> 
           
         <p>
-          <s> You do not <prosody rate="slow"> do </prosody>, you <prosody rate="slow"> do </prosody> not <prosody
-          rate="slow"> do </prosody> </s>  
+          <s> You do not <prosody rate="slow"> do </prosody>, you <prosody rate="slow"> do 
+          </prosody> not <prosody rate="slow"> do </prosody> </s>  
           <s> Any more, black <prosody rate="slow"> shoe </prosody> </s>
           <s> In which I have lived like a <prosody rate="slow"> foot </prosody> </s>   
           <s> For thirty <prosody rate="slow"> years, poor </prosody> and white, </s>   
-          <s> Barely daring to <prosody rate="slow"> breathe </prosody> or <prosody rate="slow"> achoo </prosody>. </s>
+          <s> Barely daring to <prosody rate="slow"> breathe </prosody> or <prosody 
+          rate="slow"> achoo </prosody>. </s>
         </p>
         <p>
           Daddy, I have had to <prosody rate="slow"> kill you </prosody>.   
-          You <prosody rate="slow"> died </prosody> before I had <prosody rate="slow"> time </prosody>
-          <s> <prosody rate="slow"> Marble-heavy </prosody>, a bag full of <prosody rate="slow"> God </prosody>, </s> 
-          <s> Ghastly <prosody rate="slow"> statue </prosody> with <prosody rate="slow"> one gray toe </prosody> </s>  
+          You <prosody rate="slow"> died </prosody> before I had <prosody rate="slow"> time
+          </prosody>
+          <s> <prosody rate="slow"> Marble-heavy </prosody>, a bag full of <prosody 
+          rate="slow"> God </prosody>, </s> 
+          <s> Ghastly <prosody rate="slow"> statue </prosody> with <prosody rate="slow">
+          one gray toe </prosody> </s>  
           <s> Big as a <prosody rate="slow"> Frisco seal </prosody> </s>
         </p>
       </prompt> 
     </block>
   </form>
 </vxml>
-<!--https://www.youtube.com/watch?v=_hz1ar58BIM-->
